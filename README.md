@@ -59,7 +59,8 @@ the optional TMDB key, and tells you what to do about anything that isn't right 
 
 **About MakeMKV.** The image includes [MakeMKV](https://www.makemkv.com/), unmodified, under its
 own [licence](https://www.makemkv.com/eula/); by pulling the image you accept it. It's free
-while in beta, and the beta key is fetched and kept up to date for you. MakeMKV gets past copy
+while in beta, and the beta key is fetched and kept up to date for you (your own registration
+key, if you have one, goes in Settings → MakeMKV). MakeMKV gets past copy
 protection, so check that's legal where you live.
 
 ## Features in detail
@@ -145,7 +146,6 @@ settings. The container itself only needs a few variables:
 | --------------- | ------------ | -------------------------------------------------------------- |
 | `PUID` / `PGID` | `99` / `100` | who it runs as, and who owns the files (Unraid's nobody:users) |
 | `UMASK`         | `000`        | permissions of new files                                       |
-| `MAKEMKV_KEY`   | `BETA`       | the free beta key, or your own registration key                |
 
 ## When something's off
 

@@ -32,8 +32,8 @@ Another MakeMKV install that decrypts the disc can share its data: Settings → 
 → import its `_private_data.tar`.
 
 **Key problems** (expired, rejected, the forum unreachable): the System panel and the
-checklist say so. `MAKEMKV_KEY=BETA` fetches the free beta key and renews it when it
-rotates; a registration key is used as given.
+checklist say so. The key is in Settings → MakeMKV: `BETA` (the default) fetches the free
+beta key and renews it when it rotates; a registration key is used as given.
 
 **UHD discs fail but Blu-rays work**: UHD needs the drive in LibreDrive mode; the System
 panel shows what MakeMKV reports. Many drives get it with a firmware change; see the MakeMKV

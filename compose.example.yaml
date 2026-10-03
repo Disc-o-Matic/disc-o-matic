@@ -18,4 +18,3 @@ services:
       PUID: "1000"        # who owns the files written (the host user)
       PGID: "1000"
       UMASK: "002"
-      MAKEMKV_KEY: BETA   # the free beta key, fetched and kept current; or your key

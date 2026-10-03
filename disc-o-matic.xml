@@ -28,5 +28,4 @@
   <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="User the app runs as (99 = nobody)." Type="Variable" Display="advanced" Required="true" Mask="false">99</Config>
   <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Group the app runs as (100 = users). The drive's own groups are added automatically." Type="Variable" Display="advanced" Required="true" Mask="false">100</Config>
   <Config Name="UMASK" Target="UMASK" Default="000" Mode="" Description="Permissions of new backups and rips: 000 (rw for everyone, Unraid's own convention) lets SMB users rename and delete them; 002 keeps them from others; 022 read-only for all but the app." Type="Variable" Display="advanced" Required="false" Mask="false">000</Config>
-  <Config Name="MakeMKV key" Target="MAKEMKV_KEY" Default="BETA" Mode="" Description="BETA: fetch the current free beta key from the MakeMKV forum automatically and keep it current. Or your registration key." Type="Variable" Display="always" Required="false" Mask="false">BETA</Config>
 </Container>
