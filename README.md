@@ -25,7 +25,7 @@ It can work fully automatically (except swapping discs...). Switch on Aut-o-mati
 countdown it's backed up or ripped on its own. It can work with multiple drives independently and every rip comes with the metadata your media server needs.
 
 Docker image: [`simplic17y/disc-o-matic`](https://hub.docker.com/r/simplic17y/disc-o-matic).
-Releases and what changed: [releases](https://github.com/Disc-o-Matic/disc-o-matic/releases).
+What changed in each version: [changelog](https://github.com/Disc-o-Matic/disc-o-matic/blob/main/CHANGELOG.md).
 Bugs and ideas: [issues](https://github.com/Disc-o-Matic/disc-o-matic/issues).
 
 Have fun!
