@@ -166,3 +166,10 @@ movie and TV data from [TMDB](https://www.themoviedb.org/) (this product uses th
 is not endorsed or certified by TMDB). CD checks thanks to
 [AccurateRip](http://www.accuraterip.com/) and [CTDB](http://db.cuetools.net/).
 And of course thanks to YOU for interest and patience to read it to the end :)
+
+## License
+
+The files in this repository (README, templates, docs, screenshots) are under the
+[MIT licence](https://github.com/Disc-o-Matic/disc-o-matic/blob/main/LICENSE). Disc-o-Matic itself is free
+to use; its source isn't published. The image bundles MakeMKV, which comes with its own
+[licence](https://www.makemkv.com/eula/).

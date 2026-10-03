@@ -16,6 +16,12 @@
   <WebUI>http://[IP]:[PORT:8088]/</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/Disc-o-Matic/disc-o-matic/main/disc-o-matic.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/Disc-o-Matic/disc-o-matic/main/logo.png</Icon>
+  <License>Free to use; source not published. The templates and docs in its repository: MIT. Bundles MakeMKV under its own EULA.</License>
+  <Screenshot>https://raw.githubusercontent.com/Disc-o-Matic/disc-o-matic/main/screenshots/console.png</Screenshot>
+  <Screenshot>https://raw.githubusercontent.com/Disc-o-Matic/disc-o-matic/main/screenshots/cd-ripping.png</Screenshot>
+  <Screenshot>https://raw.githubusercontent.com/Disc-o-Matic/disc-o-matic/main/screenshots/themes.png</Screenshot>
+  <Screenshot>https://raw.githubusercontent.com/Disc-o-Matic/disc-o-matic/main/screenshots/history.png</Screenshot>
+  <Screenshot>https://raw.githubusercontent.com/Disc-o-Matic/disc-o-matic/main/screenshots/settings.png</Screenshot>
   <ExtraParams>--memory=4g</ExtraParams>
   <PostArgs/>
   <CPUset/>

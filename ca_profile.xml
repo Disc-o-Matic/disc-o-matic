@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <!-- Community Applications maintainer profile, next to disc-o-matic.xml (published by
      make release-public). -->
-<Maintainer>
+<CommunityApplications>
   <Icon>https://raw.githubusercontent.com/Disc-o-Matic/disc-o-matic/main/logo.png</Icon>
   <Profile>Disc-o-Matic: rip and archive Blu-ray, UHD, DVD, audio CDs and data discs from a web UI.</Profile>
   <WebPage>https://github.com/Disc-o-Matic/disc-o-matic</WebPage>
-</Maintainer>
+</CommunityApplications>
