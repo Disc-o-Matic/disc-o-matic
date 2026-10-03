@@ -120,7 +120,6 @@ protection, so check that's legal where you live.
 - Multiple themes (Retro, Neon, Disc-o, CRT, Aqua, Hi-Fi, Jazz) and a compact layout.
 - A REST API and live event stream behind the web UI.
 
-![Four of the themes](https://raw.githubusercontent.com/Disc-o-Matic/disc-o-matic/main/screenshots/themes.png)
 
 ## Where files go
 
