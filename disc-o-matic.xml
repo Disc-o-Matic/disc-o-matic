@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!-- Community Applications template (published by make release-public, its image and
+     repository names filled in). -->
+<Container version="2">
+  <Name>Disc-o-Matic</Name>
+  <Repository>simplic17y/disc-o-matic:latest</Repository>
+  <Registry>https://hub.docker.com/r/simplic17y/disc-o-matic</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/Disc-o-Matic/disc-o-matic/issues</Support>
+  <Project>https://github.com/Disc-o-Matic/disc-o-matic</Project>
+  <Overview>Disc-o-Matic: a disc-ripping appliance with a web UI. Insert a disc and it is read and recognised: Blu-ray, UHD, DVD and HD DVD are backed up whole or ripped to MKV with MakeMKV (movies, TV season discs, concerts; Plex/Jellyfin naming); audio CDs are read with cdparanoia, checked against AccurateRip and CTDB, tagged from MusicBrainz and saved as FLAC, MP3 or Opus with cover art; data discs are copied as ISO images. Optional automatic jobs with a countdown, live progress, history with logs. Nothing is overwritten without asking.</Overview>
+  <Category>MediaApp:Video MediaApp:Music Tools:</Category>
+  <WebUI>http://[IP]:[PORT:8088]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/Disc-o-Matic/disc-o-matic/main/disc-o-matic.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/Disc-o-Matic/disc-o-matic/main/logo.png</Icon>
+  <ExtraParams>--memory=4g</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <Requires>An optical drive passed through as two devices: /dev/sr0 and its SCSI generic device /dev/sgN (find N with: for d in /sys/class/scsi_generic/*; do [ "$(cat $d/device/type)" = 5 ] &amp;&amp; echo /dev/${d##*/}; done). UHD discs need a drive MakeMKV can use in LibreDrive mode. Bundles MakeMKV: see its EULA.</Requires>
+  <Config Name="Web UI port" Target="8088" Default="8088" Mode="tcp" Description="Web UI, REST API and live updates." Type="Port" Display="always" Required="true" Mask="false">8088</Config>
+  <Config Name="Config" Target="/config" Default="/mnt/user/appdata/disc-o-matic" Mode="rw" Description="Database (dom.db), job logs, MakeMKV settings and downloaded data. Optional dom.yaml for settings." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/disc-o-matic</Config>
+  <Config Name="Backups" Target="/backups" Default="/mnt/user/media/Backups" Mode="rw" Description="Default home of all output: Bluray/ and DVD/ (full backups), MKV/, TV/, Concerts/, Music/ (CDs), CD Images/, ISO/ (data discs). Each can be moved elsewhere in Settings → Storage (map that folder here first, e.g. /mnt/user/Music → /music). Use a /mnt/user/... path: the mover leaves it alone (a /mnt/cache/... folder is moved away by the mover)." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/media/Backups</Config>
+  <Config Name="Optical drive" Target="" Default="/dev/sr0" Mode="" Description="Block device of the optical drive." Type="Device" Display="always" Required="true" Mask="false">/dev/sr0</Config>
+  <Config Name="Optical drive (SCSI generic)" Target="" Default="" Mode="" Description="SCSI generic device of the same drive (MakeMKV talks to the drive through it). The number can change when disks are added; see Requires for how to find it." Type="Device" Display="always" Required="true" Mask="false"/>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="User the app runs as (99 = nobody)." Type="Variable" Display="advanced" Required="true" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Group the app runs as (100 = users). The drive's own groups are added automatically." Type="Variable" Display="advanced" Required="true" Mask="false">100</Config>
+  <Config Name="UMASK" Target="UMASK" Default="000" Mode="" Description="Permissions of new backups and rips: 000 (rw for everyone, Unraid's own convention) lets SMB users rename and delete them; 002 keeps them from others; 022 read-only for all but the app." Type="Variable" Display="advanced" Required="false" Mask="false">000</Config>
+  <Config Name="MakeMKV key" Target="MAKEMKV_KEY" Default="BETA" Mode="" Description="BETA: fetch the current free beta key from the MakeMKV forum automatically and keep it current. Or your registration key." Type="Variable" Display="always" Required="false" Mask="false">BETA</Config>
+</Container>

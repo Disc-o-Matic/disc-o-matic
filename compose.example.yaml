@@ -1,0 +1,21 @@
+# Disc-o-Matic on any Docker host (Synology, TrueNAS, a plain Linux box).
+# docker compose -f compose.example.yaml up -d, then open http://<host>:8088.
+services:
+  disc-o-matic:
+    image: simplic17y/disc-o-matic:latest
+    container_name: disc-o-matic
+    restart: unless-stopped
+    ports:
+      - "8088:8088"
+    devices:
+      - /dev/sr0:/dev/sr0   # the drive
+      - /dev/sg2:/dev/sg2   # and its SCSI generic device (see docs/troubleshooting.md)
+    volumes:
+      - ./config:/config            # database, logs, MakeMKV data
+      - /srv/media/Backups:/backups # default home of all output
+      # - /srv/media/Music:/music   # e.g. CDs straight into a library (Settings → Storage)
+    environment:
+      PUID: "1000"        # who owns the files written (the host user)
+      PGID: "1000"
+      UMASK: "002"
+      MAKEMKV_KEY: BETA   # the free beta key, fetched and kept current; or your key
