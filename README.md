@@ -42,8 +42,10 @@ The drive goes in as two devices: its block device (`/dev/sr0`) and its SCSI gen
 (`/dev/sgN`), which MakeMKV needs. To find which `sgN` it is, run this on the server:
 
 ```sh
-ls -l /sys/class/scsi_generic/*/device/block
+ls /sys/block/sr0/device/scsi_generic
 ```
+
+It prints `sgN` (for a second drive, ask about `sr1`).
 
 Apply, then open port 8099. A second drive goes in the same way, with its own two devices.
 
