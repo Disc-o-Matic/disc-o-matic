@@ -5,18 +5,20 @@ works out what it is, and backs it up or rips it, either straight away or when y
 It runs in Docker and was made with Unraid in mind, but any Linux box with an optical drive
 will do.
 
-![Two drives: a concert DVD waiting, a CD being ripped](https://raw.githubusercontent.com/Disc-o-Matic/disc-o-matic/main/screenshots/console.png)
-
 I built it because I wanted more tailor-made features around MakeMKV and CD ripping.
 Both MakeMKV and (for example) A.R.M. offer automatic backups, but neither met my expectations. So I made this contraption.
+
+![Two drives: a concert DVD waiting, a CD being ripped](https://raw.githubusercontent.com/Disc-o-Matic/disc-o-matic/main/screenshots/console.png)
 
 ## What it does (in short)
 
 Movies, TV seasons and concerts on Blu-ray, UHD or DVD go through MakeMKV. You can keep a
 full backup of the disc or rip just the titles you want, and Disc-o-Matic looks the disc up
-so the files are named the way Plex, Jellyfin and Kodi like them.  
+so the files are named the way Plex, Jellyfin and Kodi like them.
+
 Music CDs are read and checked against AccurateRip and CTDB, to make sure each track is a perfect copy, then tagged
-from MusicBrainz and saved as FLAC (or MP3, Opus, etc.) with the cover art.  
+from MusicBrainz and saved as FLAC (or MP3, Opus, etc.) with the cover art.
+
 Data discs become ISO images, and a blank CD-R can be turned into an audio CD from any album in your backed-up library.
 
 It can work fully automatically (except swapping discs...). Switch on Aut-o-matic mode, insert a disc, and after a short
