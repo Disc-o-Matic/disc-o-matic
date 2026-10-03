@@ -1,12 +1,12 @@
 # Disc-o-Matic on any Docker host (Synology, TrueNAS, a plain Linux box).
-# docker compose -f compose.example.yaml up -d, then open http://<host>:8088.
+# docker compose -f compose.example.yaml up -d, then open http://<host>:8099.
 services:
   disc-o-matic:
     image: simplic17y/disc-o-matic:latest
     container_name: disc-o-matic
     restart: unless-stopped
     ports:
-      - "8088:8088"
+      - "8099:8088"   # the web UI: 8099 on the host (8088 inside)
     devices:
       - /dev/sr0:/dev/sr0   # the drive
       - /dev/sg2:/dev/sg2   # and its SCSI generic device (see docs/troubleshooting.md)

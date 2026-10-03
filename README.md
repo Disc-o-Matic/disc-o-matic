@@ -1,145 +1,166 @@
 # Disc-o-Matic
 
-A disc-ripping appliance with a web UI, made for Unraid and happy on any Docker host.
-Put a disc in: it is read, recognised, and (if you like) backed up or ripped by itself
-after a short countdown. Blu-ray, UHD, DVD and HD DVD go through MakeMKV; audio CDs through
-cdparanoia, verified bit for bit; data discs are kept whole as ISO images. Nothing is ever
-overwritten without asking.
+A disc ripper that lives on your server. Put a disc in the drive and Disc-o-Matic reads it,
+works out what it is, and backs it up or rips it, either straight away or when you say so.
+It runs in Docker and was made with Unraid in mind, but any Linux box with an optical drive
+will do.
 
-![A concert DVD, recognised, ready to back up](screenshots/console-movie.png)
+![Two drives: a concert DVD waiting, a CD being ripped](https://raw.githubusercontent.com/Disc-o-Matic/disc-o-matic/main/screenshots/console.png)
 
-**Install:** the Docker image is [`simplic17y/disc-o-matic`](https://hub.docker.com/r/simplic17y/disc-o-matic); releases and
-their notes are [here](https://github.com/Disc-o-Matic/disc-o-matic/releases). Questions and bugs:
-[issues](https://github.com/Disc-o-Matic/disc-o-matic/issues).
+I built it because I wanted more tailor-made features around MakeMKV and CD ripping.
+Both MakeMKV and (for example) A.R.M. offer automatic backups, but neither met my expectations. So I made this contraption.
 
-## What it does
+## What it does (in short)
 
-**Video discs** (MakeMKV)
-- Full decrypted backups (the disc's folder structure) or MKV rips of chosen titles; the
-  main feature is picked for you.
-- Recognised with TMDB (movies, TV season discs: your own free key) and MusicBrainz
-  (concerts, no key), with posters to choose from.
-- Plex/Jellyfin naming: `Movies/Alien (1979)/Alien (1979) - 2160p.mkv`, several versions
-  of a film in one folder, TV episodes as `Show (Year)/Season 01/Show (Year) - S01E05 - Title.mkv`,
-  concerts in their own folder. Templates for everything, a folder name can be typed by
-  hand, even while the rip runs.
-- UHD with a LibreDrive-capable drive; MakeMKV's beta key fetched and kept current.
-- Rip MKVs later from a full backup, no disc needed: System → Open a backup… (or Open on a
-  finished backup).
-- Track profiles (Settings → Track profiles): which audio and subtitle languages a rip keeps,
-  stereo twins and HD cores left out, LPCM saved as FLAC; picked per rip in the Titles panel,
-  where the languages can still be changed, and passed to MakeMKV as a profile of its own.
+Movies, TV seasons and concerts on Blu-ray, UHD or DVD go through MakeMKV. You can keep a
+full backup of the disc or rip just the titles you want, and Disc-o-Matic looks the disc up
+so the files are named the way Plex, Jellyfin and Kodi like them.  
+Music CDs are read and checked against AccurateRip and CTDB, to make sure each track is a perfect copy, then tagged
+from MusicBrainz and saved as FLAC (or MP3, Opus, etc.) with the cover art.  
+Data discs become ISO images, and a blank CD-R can be turned into an audio CD from any album in your backed-up library.
 
-**Audio CDs** (cdparanoia)
-- Secure reading with the drive's read offset corrected; every track checked against
-  **AccurateRip** and **CTDB**, with a diagnosis when it doesn't match (another pressing,
-  read errors, a wrong offset).
-- Fast: a disc the databases know is read at full speed first, and only the tracks they
-  don't confirm are read again carefully; once the last track is read the drive is free
-  (ejected, if you like) while encoding, checks and tagging finish in the background.
-- MusicBrainz disc ID (CD-TEXT and CD stubs when it has nothing), every tag Picard would
-  write, ReplayGain, cover art (Cover Art Archive, Deezer, iTunes, your pick), a playlist.
-- FLAC, MP3 or Opus; albums of several discs in one folder; hidden tracks before track 1;
-  "[silence]" filler tracks left out; an optional whole-disc FLAC + cue image.
-- Scratched discs: retries per sector and per track, and a failed rip resumes where it
-  stopped.
+It can work fully automatically (except swapping discs...). Switch on Aut-o-matic mode, insert a disc, and after a short
+countdown it's backed up or ripped on its own. It can work with multiple drives independently and every rip comes with the metadata your media server needs.
 
-![Ripping a CD: the step, the latest log line, progress](screenshots/console-cd-ripping.png)
+Docker image: [`simplic17y/disc-o-matic`](https://hub.docker.com/r/simplic17y/disc-o-matic).
+Releases and what changed: [releases](https://github.com/Disc-o-Matic/disc-o-matic/releases).
+Bugs and ideas: [issues](https://github.com/Disc-o-Matic/disc-o-matic/issues).
 
-**Data discs**: copied sector by sector with ddrescue to `ISO/<label>.iso`, unreadable
-spots retried and reported.
+Have fun!
 
-**Burning**: put a blank CD-R in and pick an album from the music folder: its tracks are
-turned into CD audio (FLAC, MP3, Opus; resampled when need be) and burnt disc-at-once with
-cdrdao, with CD-TEXT so players show the artist and titles.
-
-**Metadata kept with the files**: each backup or rip gets a `disc.json` (the disc as read and
-its match), Kodi/Jellyfin NFO files (movie, TV show and episodes, album) and the poster and
-backdrop, so it describes itself without DOM's database and media servers take the match as
-confirmed. Your own NFO or poster files are never overwritten (Settings → Defaults to switch off).
-
-**Several drives**: every optical drive the container has gets its own section, working at
-the same time (a CD rip in one, a Blu-ray backup in the other); each with its own name, read
-offset (AccurateRip's for its model suggested), Aut-o-matic switch and Blu-ray / DVD mode
-(Settings → Drives). An opened backup is a section of its own too: ripping MKVs from it never
-waits for a drive, nor holds one up.
-
-**Around it**: an automatic job after each disc is read (with a countdown you can stop),
-discs done before left alone, live progress, a history with every log, verify a CD again
-later, delete a rip with its files, desktop notifications and a chime, themes.
+![A CD being ripped](https://raw.githubusercontent.com/Disc-o-Matic/disc-o-matic/main/screenshots/cd-ripping.png)
 
 ## Install
 
-**Unraid**: in Community Applications search for *Disc-o-Matic*, or add the template by hand:
-Docker → Add Container → Template → paste
-`https://raw.githubusercontent.com/Disc-o-Matic/disc-o-matic/main/disc-o-matic.xml`. Pass the optical
-drive as two devices: its block device (`/dev/sr0`) and its SCSI generic device (`/dev/sgN`;
-`ls -l /sys/class/scsi_generic/*/device/block` shows which N belongs to which drive). Apply
-and open port 8088. Each further drive: its two devices too.
+**Unraid.** Search for _Disc-o-Matic_ in Community Applications, or add the template by hand:
+Docker → Add Container → Template, and paste
+`https://raw.githubusercontent.com/Disc-o-Matic/disc-o-matic/main/disc-o-matic.xml`.
 
-**Any Docker host**: [compose.example.yaml](compose.example.yaml), or
+The drive goes in as two devices: its block device (`/dev/sr0`) and its SCSI generic device
+(`/dev/sgN`), which MakeMKV needs. To find which `sgN` it is, run this on the server:
 
 ```sh
-docker run -d --name disc-o-matic -p 8088:8088 \
+ls -l /sys/class/scsi_generic/*/device/block
+```
+
+Apply, then open port 8099. A second drive goes in the same way, with its own two devices.
+
+**Anywhere else with Docker.** See [compose.example.yaml](https://github.com/Disc-o-Matic/disc-o-matic/blob/main/compose.example.yaml), or:
+
+```sh
+docker run -d --name disc-o-matic -p 8099:8088 \
   --device /dev/sr0 --device /dev/sg2 \
   -v ./config:/config -v /srv/media/Backups:/backups \
   -e PUID=1000 -e PGID=1000 simplic17y/disc-o-matic:latest
 ```
 
-The image bundles [MakeMKV](https://www.makemkv.com/), unmodified, under its own
-[EULA](https://www.makemkv.com/eula/): pulling and running the image means accepting it. It is
-free during its beta and needs no key setup here (`MAKEMKV_KEY=BETA`). MakeMKV bypasses copy
-protection: make sure that is legal where you live.
+On first start you'll see a setup checklist. It checks the drives, MakeMKV, your folders and
+the optional TMDB key, and tells you what to do about anything that isn't right yet.
 
-On first start the console shows a **setup checklist**: each drive and its control device,
-LibreDrive, the MakeMKV key, every output folder, the optional TMDB key, each with what to
-do when it isn't right.
+**About MakeMKV.** The image includes [MakeMKV](https://www.makemkv.com/), unmodified, under its
+own [licence](https://www.makemkv.com/eula/); by pulling the image you accept it. It's free
+while in beta, and the beta key is fetched and kept up to date for you. MakeMKV gets past copy
+protection, so check that's legal where you live.
 
-## Configure
+## Features in detail
 
-Almost everything is in **Settings**, applied immediately and kept in the database:
-notifications, what happens to a disc (mode, automatic job and its delay, existing
-output), naming templates with live previews, the output folders (Settings → Storage),
-movie recognition, music (format, verification, read offset, cover sources, …), the
-MakeMKV key and read retries.
+**Blu-ray, UHD, DVD and HD DVD** (MakeMKV)
 
-Container variables:
+- Full decrypted backups: a Blu-ray as its BDMV folder, a DVD as an ISO image.
+- UHD with a LibreDrive-capable drive; MakeMKV's beta key fetched and kept current.
+- MKV rips of chosen titles; the main feature is picked for you, and flagged when it's unclear.
+- Rip MKVs later from a full backup, without the disc, in a section of its own that never
+  holds up a drive.
+- Recognition: TMDB for movies and TV (bring your own free API key), MusicBrainz for concerts; posters
+  to choose from; a match can be fixed or entered by hand at any time.
+- Naming for Plex, Jellyfin and Kodi: one folder per movie with several versions side by side
+  (`Alien (1979) - 2160p.mkv`, `- 1080p.mkv`), TV episodes as `Season 01/Show - S01E05 - Title.mkv`,
+  extras in `Other/`. Templates for everything, with live examples, and a folder name can be
+  typed by hand, even while the rip runs.
+- Track profiles: which audio and subtitle languages to keep, stereo duplicates and HD cores
+  left out, LPCM saved as FLAC; picked per rip.
 
-| Variable | Default | |
-|---|---|---|
-| `PUID` / `PGID` | `99` / `100` | who the app runs as and owns new files (Unraid's nobody:users) |
-| `UMASK` | `000` | permissions of new files (000: anyone on the share may change them) |
-| `MAKEMKV_KEY` | `BETA` | the free beta key, kept current; or your registration key |
-| `MAKEMKV_UPDATE_CHECK` | `1` | MakeMKV's own online check (keeps its key data current) |
+**Music CDs** (cdparanoia)
 
-Settings can also come from `/config/dom.yaml` (see the example in the source) or
-`DOM_<SECTION>__<KEY>` variables, e.g. `DOM_CD__FORMAT=opus`; Settings in the UI win.
+- Secure reading with the drive's read offset corrected; the offset for your drive model is
+  suggested from AccurateRip's list.
+- Every track checked against AccurateRip and CTDB, with a plain-language diagnosis when it
+  doesn't match (another pressing, read errors, a wrong offset).
+- Fast: a disc the databases know is read at full speed first, and only tracks they don't
+  confirm are read again carefully. Tracks are encoded while the next one is read, and the
+  drive is free (ejected, if you like) while the last checks and tagging finish.
+- Scratched discs: retries per sector and per track, and a stopped rip resumes where it left
+  off, in any drive.
+- MusicBrainz disc ID, falling back to CD-TEXT and CD stubs; the tags Picard would write;
+  ReplayGain; cover art from the Cover Art Archive, Deezer or iTunes; a playlist.
+- FLAC (verified after encoding), MP3 or Opus; multi-disc albums in one folder; hidden tracks
+  before track 1; silent filler tracks left out; an optional whole-disc FLAC + cue image.
+- A standard rip log next to every album, with checksums and the result of each check.
 
-Default folders, all under `/backups` until you move them:
+**Data discs and blanks**
 
-| Disc | Folder |
-|---|---|
-| Full backups (Blu-ray, UHD) | `Bluray/<Title (Year)> [<media>]/` (its BDMV folder) |
-| Full backups (DVD) | `DVD/<Title (Year)> [DVD]/<Title (Year)> [DVD].iso` (MakeMKV saves a DVD as an image) |
-| Movies (MKV) | `MKV/<Title (Year)>/` |
-| TV, concerts | `TV/…`, `Concerts/…` |
-| Audio CDs | `Music/<Artist>/<Album (Year)>/01 - Title.flac` |
-| CD images | `CD Images/<Artist>/<Album (Year)>/` |
-| Data discs | `ISO/<label>.iso` |
+- Data discs copied sector by sector to an ISO image (GNU ddrescue), bad spots retried and
+  reported.
+- Burning: pick an album from your music folder and it's converted to CD audio and burnt
+  disc-at-once (cdrdao), with CD-TEXT.
 
-## Troubleshooting
+**Around the jobs**
 
-See [troubleshooting.md](troubleshooting.md): the drive not found, MakeMKV not seeing it,
-"volume key unknown", UHD, permissions, `move_failed`, CD verification results and
-scratched discs.
+- Several drives at once, each with its own section, name, read offset, Aut-o-matic switch
+  and Blu-ray/DVD mode.
+- Aut-o-matic: after a disc is read, the job starts after a countdown you can adjust or stop.
+- Metadata with every backup and rip: `disc.json` (the disc as read and its match), Kodi and
+  Jellyfin NFO files (movie, TV show and episodes, album), poster and backdrop.
+- History of every job with its full log.
+- Live progress and a finish chime.
+- Setup checklist on first start and whenever something breaks.
+- Multiple themes (Retro, Neon, Disc-o, CRT, Aqua, Hi-Fi, Jazz) and a compact layout.
+- A REST API and live event stream behind the web UI.
 
-## Credits
+![Four of the themes](https://raw.githubusercontent.com/Disc-o-Matic/disc-o-matic/main/screenshots/themes.png)
 
-- [MakeMKV](https://www.makemkv.com/) (bundled, under its own EULA), cdparanoia, FLAC, LAME,
-  opus-tools, rsgain, GNU ddrescue, libdiscid, libcdio.
-- Metadata: [MusicBrainz](https://musicbrainz.org/) and the
-  [Cover Art Archive](https://coverartarchive.org/) (no key), [TMDB](https://www.themoviedb.org/)
-  (your own free key; this product uses the TMDB API but is not endorsed or certified by
-  TMDB), Deezer and iTunes covers when the archive has none.
-- Verification: [AccurateRip](http://www.accuraterip.com/) and
-  [CTDB](http://db.cuetools.net/) (CUETools).
+## Where files go
+
+Everything lands under `/backups` unless you move it (Settings → Storage):
+
+| What                 | Where                                                       |
+| -------------------- | ----------------------------------------------------------- |
+| Blu-ray / UHD backup | `Bluray/Alien (1979) [BluRay]/` (the disc's BDMV folder)    |
+| DVD backup           | `DVD/Alien (1979) [DVD]/Alien (1979) [DVD].iso`             |
+| Movies (MKV)         | `MKV/Alien (1979)/Alien (1979) - 1080p.mkv`                 |
+| TV (MKV)             | `TV/Show (2008)/Season 01/Show (2008) - S01E05 - Title.mkv` |
+| Concerts (MKV)       | `Concerts/Artist - Title (Year)/`                           |
+| Music CDs            | `Music/Artist/Album (Year)/01 - Title.flac`                 |
+| Data discs           | `ISO/LABEL.iso`                                             |
+
+Point Music straight at your music library if you want new albums to show up there right away.
+
+## Settings
+
+Almost everything is in the Settings page and takes effect immediately: what happens when a
+disc goes in, naming templates, folders, music formats and checks, and each drive's own
+settings. The container itself only needs a few variables:
+
+| Variable        | Default      |                                                                |
+| --------------- | ------------ | -------------------------------------------------------------- |
+| `PUID` / `PGID` | `99` / `100` | who it runs as, and who owns the files (Unraid's nobody:users) |
+| `UMASK`         | `000`        | permissions of new files                                       |
+| `MAKEMKV_KEY`   | `BETA`       | the free beta key, or your own registration key                |
+
+## When something's off
+
+[troubleshooting.md](https://github.com/Disc-o-Matic/disc-o-matic/blob/main/troubleshooting.md) covers the usual suspects: a drive that isn't found,
+MakeMKV not seeing it, "volume key unknown", UHD, permissions, CD check results and scratched
+discs. If that doesn't help, [open an issue](https://github.com/Disc-o-Matic/disc-o-matic/issues).
+
+More screenshots: [history](https://raw.githubusercontent.com/Disc-o-Matic/disc-o-matic/main/screenshots/history.png), [settings](https://raw.githubusercontent.com/Disc-o-Matic/disc-o-matic/main/screenshots/settings.png).
+
+## Thanks
+
+[MakeMKV](https://www.makemkv.com/) (bundled, under its own licence), cdparanoia, FLAC, LAME,
+opus-tools, rsgain, GNU ddrescue, cdrdao, libdiscid and libcdio. Disc and album data from
+[MusicBrainz](https://musicbrainz.org/) and the [Cover Art Archive](https://coverartarchive.org/);
+movie and TV data from [TMDB](https://www.themoviedb.org/) (this product uses the TMDB API but
+is not endorsed or certified by TMDB). CD checks thanks to
+[AccurateRip](http://www.accuraterip.com/) and [CTDB](http://db.cuetools.net/).
+And of course thanks to YOU for interest and patience to read it to the end :)
