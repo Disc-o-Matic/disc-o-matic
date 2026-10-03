@@ -28,8 +28,6 @@ change.
 
 **"The volume key is unknown for this disc"**: MakeMKV has no key for this disc yet. It
 sent the disc's data for analysis; keys usually follow within 12–48 hours, try again then.
-Another MakeMKV install that decrypts the disc can share its data: Settings → MakeMKV data
-→ import its `_private_data.tar`.
 
 **Key problems** (expired, rejected, the forum unreachable): the System panel and the
 checklist say so. The key is in Settings → MakeMKV: `BETA` (the default) fetches the free

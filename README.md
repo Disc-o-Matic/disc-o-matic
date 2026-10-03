@@ -130,12 +130,16 @@ Everything lands under `/backups` unless you move it (Settings → Storage):
 | Blu-ray / UHD backup | `Bluray/Alien (1979) [BluRay]/` (the disc's BDMV folder)    |
 | DVD backup           | `DVD/Alien (1979) [DVD]/Alien (1979) [DVD].iso`             |
 | Movies (MKV)         | `MKV/Alien (1979)/Alien (1979) - 1080p.mkv`                 |
-| TV (MKV)             | `TV/Show (2008)/Season 01/Show (2008) - S01E05 - Title.mkv` |
-| Concerts (MKV)       | `Concerts/Artist - Title (Year)/`                           |
+| TV (MKV)             | `MKV/Show (2008)/Season 01/Show (2008) - S01E05 - Title.mkv`|
+| Concerts (MKV)       | `MKV/Artist - Title (Year)/`                                |
 | Music CDs            | `Music/Artist/Album (Year)/01 - Title.flac`                 |
 | Data discs           | `ISO/LABEL.iso`                                             |
 
 Point Music straight at your music library if you want new albums to show up there right away.
+Anything can go somewhere else: Settings → Storage → Exceptions takes a folder per kind
+(movie, TV, concert) and disc type (UHD, Blu-ray, DVD), separately for backups and MKV rips.
+So TV and concerts can have libraries of their own, a concert DVD's backup can sit with your
+concerts, and UHD rips can go apart from the 1080p ones.
 
 ## Settings
 
