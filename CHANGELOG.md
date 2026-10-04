@@ -3,6 +3,15 @@
 What changed in each release of Disc-o-Matic. The image for each version is
 `simplic17y/disc-o-matic:<version>`; `latest` is the newest.
 
+## 0.5.37 (2026-10-04)
+
+### New
+
+- **Open a backup or burn an album from any folder.** Both pickers have a *Browse folders*
+  switch that walks through every folder mapped into the container, not only Disc-o-Matic's
+  own. Each entry says what it is: a disc backup or a disc image (open it to rip MKVs), an
+  album (pick it to burn) or just a folder. A loose `.iso` file can be opened directly.
+
 ## 0.5.36 (2026-10-04)
 
 ### New
