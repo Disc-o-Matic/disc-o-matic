@@ -3,6 +3,16 @@
 What changed in each release of Disc-o-Matic. The image for each version is
 `simplic17y/disc-o-matic:<version>`; `latest` is the newest.
 
+## 0.5.36 (2026-10-04)
+
+### New
+
+- **Backup and restore** in Settings → Housekeeping. *Settings* downloads everything you set
+  in Settings, each drive's own settings and the track profiles as a small file; restoring it
+  applies straight away. *Everything* downloads the whole database, history included;
+  restoring it takes effect when the container restarts, and the database it replaces is
+  kept next to it. Handy for moving to another server or going back to an earlier state.
+
 ## 0.5.35 (2026-10-04)
 
 ### New
