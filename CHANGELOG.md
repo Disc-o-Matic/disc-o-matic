@@ -3,6 +3,24 @@
 What changed in each release of Disc-o-Matic. The image for each version is
 `simplic17y/disc-o-matic:<version>`; `latest` is the newest.
 
+## 0.5.38 (2026-10-05)
+
+### Changed
+
+- Aut-o-matic waits for the disc to be looked up before its countdown starts, so the rip or
+  backup is named after what was found, not the disc's label. It waits a minute at most.
+- Changing what a disc is (movie, TV, concert) while Aut-o-matic waits pauses it: it starts
+  when you say.
+- While Aut-o-matic counts down, its button is now *Pause*: it waits for you to start it.
+- The Movie / TV / Concert switch takes effect at once; the lookup as that kind follows, and
+  the switch waits until it's done.
+- The line under a disc's title keeps its height while it's looked up, so the card doesn't
+  jump (a TV disc's season and episodes now sit on that line too).
+- A tidier titles table in four columns: the title (its number, resolution and codec,
+  playlist), its length (with size and chapters), audio with a line per track, and subtitle
+  languages once each (with how many tracks, and F for forced ones). Nothing breaks mid-word
+  any more in a narrow card.
+
 ## 0.5.37 (2026-10-04)
 
 ### New
