@@ -3,6 +3,34 @@
 What changed in each release of Disc-o-Matic. The image for each version is
 `simplic17y/disc-o-matic:<version>`; `latest` is the newest.
 
+## 0.5.40 (2026-10-06)
+
+### New
+
+- **Remux a video file.** Open a backup → Browse folders now lists video files too: MKV,
+  and MP4, AVI, M2TS and the like. Open one and it shows like a disc's title, with its audio
+  and subtitle tracks; *Remux* writes an MKV with only the languages you pick (or the track
+  profile's), named and filed like any MKV rip, and called a remux throughout (Remuxing…,
+  MKV remux in the history). Nothing is converted, so it's quick and lossless. Uses
+  MKVToolNix, now in the image.
+
+### Changed
+
+- The backups to open are kept in an index, so the list opens and searches at once; it is
+  brought up to date in the background, and *Reindex* looks through the backup folders now.
+  Each backup says what it holds and where it is.
+- Browse folders shows what each entry is: a folder, a movie's folder, a video file, a disc
+  backup or image, an album, with a line on what's inside.
+- Without a TMDB key, a movie or TV disc's card says so as an orange warning, with a link
+  straight to the key's setting.
+
+### Fixed
+
+- A widescreen picture cropped in height counts by its width: a 1280×546 file is 720p (and
+  named so), not "546p".
+- A card could stay on "Ripping… 100 %" after the job had finished when two updates came at
+  once; the newest one now always wins.
+
 ## 0.5.38 (2026-10-05)
 
 ### Changed
