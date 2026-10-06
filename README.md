@@ -14,7 +14,8 @@ Both MakeMKV and (for example) A.R.M. offer automatic backups, but neither met m
 
 Movies, TV seasons and concerts on Blu-ray, UHD or DVD go through MakeMKV. You can keep a
 full backup of the disc or rip just the titles you want, and Disc-o-Matic looks the disc up
-so the files are named the way Plex, Jellyfin and Kodi like them.
+so the files are named the way Plex, Jellyfin and Kodi like them. Video files you already
+have can be remuxed too, to drop the audio and subtitle tracks you don't need.
 
 Music CDs are read and checked against AccurateRip and CTDB, to make sure each track is a perfect copy, then tagged
 from MusicBrainz and saved as FLAC (or MP3, Opus, etc.) with the cover art.
@@ -75,7 +76,10 @@ protection, so check that's legal where you live.
 - UHD with a LibreDrive-capable drive; MakeMKV's beta key fetched and kept current.
 - MKV rips of chosen titles; the main feature is picked for you, and flagged when it's unclear.
 - Rip MKVs later from a full backup, without the disc, in a section of its own that never
-  holds up a drive.
+  holds up a drive. Backups open from any folder you map into the container, disc images
+  (`.iso`) included.
+- Remux video files you already have (MKV, MP4, AVI, M2TS …) into an MKV with only the audio
+  and subtitle languages you want: lossless and quick, with MKVToolNix.
 - Recognition: TMDB for movies and TV (bring your own free API key), MusicBrainz for concerts; posters
   to choose from; a match can be fixed or entered by hand at any time.
 - Naming for Plex, Jellyfin and Kodi: one folder per movie with several versions side by side
