@@ -3,6 +3,44 @@
 What changed in each release of Disc-o-Matic. The image for each version is
 `simplic17y/disc-o-matic:<version>`; `latest` is the newest.
 
+## 0.5.55 (2026-10-06)
+
+### New
+
+- **DSD Discs**: an album of DSF (or DFF) files burnt to a DVD-R, DVD-RW, DVD+R or DVD+RW,
+  for players that play DSD from a disc. Put a blank DVD in a DVD writer and pick the album
+  (Burn a DSD Disc…); a DVD-RW with something on it can be written over (Write a DSD Disc
+  over it…), at the drive's speed or one you choose. What a player takes varies: try one
+  disc first (a Sony UBP-X700 plays them). DSD albums aren't offered for CD burning any
+  more.
+- **Notifications on your phone or in a chat**, also with no Disc-o-Matic tab open: when a
+  job is done, when one fails, and when a disc needs you (the automatic job didn't start,
+  and why). Settings → Notifications → *Phone & chat* takes Apprise addresses: ntfy (free,
+  no account), Telegram, Discord, e-mail and many more, checked as you enter them; *Send
+  test* tries them. How to set up ntfy or Telegram: the troubleshooting guide.
+- **Plex and Jellyfin know at once.** Settings → Media servers: give Plex's address and
+  token and/or Jellyfin's address and an API key, and when a rip finishes the server is
+  asked to scan its libraries of that kind (a movie: its Movies, a CD: its Music …). Choose
+  which kinds: only music, say. *Check* shows whether the server is reached and which
+  libraries it has.
+- **Catalogue**: a page listing every disc you've put in, with what it is (its match and
+  poster), what was made of it (backup, MKV, music, ISO: where it went, and a warning if
+  it's gone since) and when it was last seen. Search it, filter it by kind or by "something
+  gone", and download it as a CSV. Posters come from the ones saved with your backups and
+  rips; a disc without one gets its match's, fetched once and kept as a small thumbnail.
+- **A password** for the web UI and the API, off until you set one in Settings → Access.
+  Browsers sign in once (for 30 days), scripts send it with HTTP Basic auth
+  (`curl -u :password`), and the health check stays open. Forgotten: start the container
+  once with `DOM_AUTH__RESET=true`.
+
+### Changed
+
+- A job's log says where its notification went and which libraries Plex and Jellyfin were
+  asked to scan, or why not.
+- Opening the burn dialog pauses Aut-o-matic's countdown for that disc, as Fix match does.
+- The layout switch is two icons now (a drive to a row, or two side by side) instead of a
+  drop-down, and Blu-ray discs get a blue tag.
+
 ## 0.5.40 (2026-10-06)
 
 ### New

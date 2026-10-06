@@ -111,7 +111,8 @@ protection, so check that's legal where you live.
 - Data discs copied sector by sector to an ISO image (GNU ddrescue), bad spots retried and
   reported.
 - Burning: pick an album from your music folder and it's converted to CD audio and burnt
-  disc-at-once (cdrdao), with CD-TEXT.
+  disc-at-once (cdrdao), with CD-TEXT. DSF albums go to a DVD instead, as a DSD Disc for
+  players that play DSD from a disc.
 
 **Around the jobs**
 
@@ -120,10 +121,15 @@ protection, so check that's legal where you live.
 - Aut-o-matic: after a disc is read, the job starts after a countdown you can adjust or stop.
 - Metadata with every backup and rip: `disc.json` (the disc as read and its match), Kodi and
   Jellyfin NFO files (movie, TV show and episodes, album), poster and backdrop.
-- History of every job with its full log.
-- Live progress and a finish chime.
+- Plex and Jellyfin told to scan the right libraries when a rip finishes (per kind: only
+  music, say).
+- History of every job with its full log, and a catalogue of every disc you've put in: what
+  it is, what was made of it and whether that's still there (searchable, CSV export).
+- Live progress and a finish chime; notifications on your phone or in a chat (ntfy, Telegram,
+  Discord, e-mail and more, through Apprise) when a job is done, fails or a disc needs you.
 - Setup checklist on first start and whenever something breaks.
 - Multiple themes (Retro, Neon, Disc-o, CRT, Aqua, Hi-Fi, Jazz) and a compact layout.
+- An optional password for the web UI and its API.
 - A REST API and live event stream behind the web UI.
 
 

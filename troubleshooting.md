@@ -122,3 +122,60 @@ damaged one). It is kept whole as an ISO; MakeMKV can open the image later.
 
 **Unreadable sectors reported**: ddrescue retried them (*iso.retries*); they are zeros in
 the image. Cleaning the disc and saving again may get them.
+
+## Notifications on your phone
+
+Settings → Notifications → **Phone & chat** takes one or more addresses
+([Apprise](https://github.com/caronc/apprise/wiki) ones), separated by spaces. Disc-o-Matic
+sends to them when a job is done, when one fails and when a disc needs you (each can be
+switched off), with or without a Disc-o-Matic tab open. **Send test** checks them.
+
+**ntfy** (free, no account, iPhone and Android):
+
+1. Install the ntfy app and subscribe to a topic with a long, random name, such as
+   `dom-k7f3q9x2v8` (on the free ntfy.sh server anyone who knows the name can read it: the
+   name is the password).
+2. Enter `ntfys://ntfy.sh/dom-k7f3q9x2v8` as the address.
+
+Running ntfy yourself (it's in Community Applications): `ntfy://your-server/topic`.
+
+**Telegram** (free):
+
+1. Message @BotFather, send `/newbot` and follow it; it gives you the bot's token.
+2. Send your new bot any message, then open
+   `https://api.telegram.org/bot<token>/getUpdates` in a browser: the `chat` → `id` there is
+   your chat id.
+3. Enter `tgram://<token>/<chat id>` as the address.
+
+**Discord**: a channel's settings → Integrations → Webhooks → New webhook → Copy URL; enter
+it as is (`https://discord.com/api/webhooks/…`), Apprise knows it.
+
+Nothing arrives? Press Send test: an address that could not be sent to is named. Wrong
+tokens and an unreachable server end up in the container's log too.
+
+## The password
+
+Settings → Access sets a password for the web UI and the API (off until you set one).
+Scripts send it with HTTP Basic auth: `curl -u :yourpassword http://server:8099/api/state`.
+
+Forgotten it? In Unraid: Docker → Disc-o-Matic → Edit → Add another Path, Port, Variable…
+→ Variable, key `DOM_AUTH__RESET`, value `true` → Apply. The container starts without a
+password; then remove that variable again (Edit → its Remove), or every restart clears the
+password you set next.
+
+## DSD Discs
+
+An album of DSF or DFF files can be burnt to a DVD (DVD-R, DVD-RW, DVD+R, DVD+RW) for
+players that play DSD from a disc (Sony calls it "DSD Disc"; several Oppo, Pioneer, Denon
+and Marantz players read them too). The disc holds the album's folder as it is (UDF and ISO
+9660), closed so players read it. Players differ in what they accept (sample rate, DFF or
+only DSF, folders): burn one disc first, on a DVD-RW if you have one, and see. Known to
+play: Sony UBP-X700 (a DSD64 album on a DVD+RW).
+
+DVDs often write slower than their label says (a 4× DVD+RW at 1×, say): the drive plays
+safe with a disc it doesn't know. The burn dialog's Speed asks for more; a slower burn reads
+just as well, often better.
+
+It needs a DVD writer passed into the container. A blank DVD shows as "Blank DVD-R" (or
+-RW, +R, +RW); a DVD-RW with something on it shows as a data disc with "Write a DSD Disc
+over it…". This doesn't make an SACD: SACD players don't play burnt discs.
